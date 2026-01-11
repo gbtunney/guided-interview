@@ -1,0 +1,46 @@
+{
+    "name": "@gbt/tuya-device",
+    "version": "0.0.0",
+    "private": true,
+    "description": "Tuya Device Scripts",
+    "scripts": {
+        "\n========== HOME-ASSISTANT >> ==========": "",
+        "gbt-tuya": "pnpm exec ./.venv/bin/python ./script.py",
+        "\n========== TEST >> ==========": "",
+        "test": "cross-var pnpm exec echo '\n===\n>> Tests : No tests set for $npm_package_name' ",
+        "\n========== CLEAN >> ==========": "",
+        "clean:bk": "pnpm clean:ts && pnpm clean:build",
+        "clean:ts": "pnpm exec tsc --build --clean",
+        "clean:build": "pnpm exec rm -rf ./dist ./types",
+        "\n========== RELEASE >> ==========": "",
+        "release": "pnpm run prerelease && pnpm changeset",
+        "prerelease": "pnpm run build && pnpm run fix && pnpm run check && pnpm test",
+        "\n========== CHECK >> ==========": "",
+        "check": "pnpm check:self",
+        "check:md": "pnpm run lint:md",
+        "check:self": "pnpm check:python",
+        "check:python": "pnpm exec ./.venv/bin/python -m black --check .",
+        "\n========== FIX >> ==========": "",
+        "fix": "pnpm fix:self",
+        "fix:md": "pnpm run lint:md --fix",
+        "fix:self": "pnpm prettier --write && pnpm run fix:python",
+        "fix:python": "pnpm exec ./.venv/bin/python -m black .",
+        "\n========== CODE STYLE >> ==========": "",
+        "prettier": "prettier --ignore-path ./.gitignore --no-error-on-unmatched-pattern .",
+        "lint": "pnpm exec eslint . ",
+        "lint:md": "pnpm exec markdownlint-cli2 '{./*,./**/*}.md' '#**/node_modules/**' '#packages/test-package/**/*' "
+    },
+    "devDependencies": {
+        "cross-var": "^1.1.0",
+        "dotenv-cli": "^8.0.0"
+    },
+    "type": "module",
+    "author": {
+        "name": "Gillian Tunney",
+        "email": "gbtunney@mac.com"
+    },
+    "engines": {
+        "node": ">=18.7.0 <22.0.0",
+        "pnpm": ">=10.0.0"
+    }
+}

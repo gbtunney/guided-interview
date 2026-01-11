@@ -1,0 +1,12 @@
+dist
+*.js
+*.d.ts
+*.js.map
+types
+dist
+*.js
+*.d.ts
+*.js.map
+types
+!src/appscript_code.js
+reg

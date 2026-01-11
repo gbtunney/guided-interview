@@ -1,0 +1,13 @@
+./*
+*.ts
+**/*.ts
+*.d.ts
+*.js.map
+types
+./*.json
+node_modules/**
+node_modules/**/.*/**
+node_modules/**/.*
+/node_modules/**/*
+./node_modules/**
+!./dist/*

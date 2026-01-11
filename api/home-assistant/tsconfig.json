@@ -1,0 +1,19 @@
+{
+    "extends": "@snailicide/build-config/tsconfig-base",
+    "compilerOptions": {
+        /* Language and Environment */
+        "strict": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "target": "ES2018" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
+        /* Modules */
+        "esModuleInterop": true,
+        "module": "ESNext" /* Specify what module code is generated. */,
+        "moduleResolution": "Node", //"outDir": "./dist",
+        "lib": ["ESNext"],
+        "types": ["node", "google-apps-script"],
+        "noEmit": true
+    },
+    "files": ["esbuild.ts"],
+    "include": ["./src/**/*.ts"]
+}
