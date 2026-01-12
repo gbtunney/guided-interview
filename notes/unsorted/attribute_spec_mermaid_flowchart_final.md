@@ -7,9 +7,9 @@ This is intentionally **plain Markdown**, not a schema language.
 
 ---
 
-## Vocabulary (what these words mean)
+# # Vocabulary (what these words mean)
 
-### Scalar
+## # Scalar
 
 - A **single value**.
 - Not nested, not iterable, not a container.
@@ -22,7 +22,7 @@ Non-examples:
 
 - objects, lists, maps.
 
-### Object vs Map / Dictionary
+## # Object vs Map / Dictionary
 
 - **Object**: known fields, fixed meaning per field.
   - Example: `{ id: string; name: string }`
@@ -36,9 +36,9 @@ Rule of thumb:
 
 ---
 
-## ID and Label (naming conventions)
+# # ID and Label (naming conventions)
 
-### ID
+## # ID
 
 - The **machine identifier** for the field.
 - Prefer **stable** and **boring**.
@@ -48,7 +48,7 @@ Rule of thumb:
   - `camelCase` (e.g. `productId`)
   - `PascalCase` (e.g. `ProductId`)
 
-### Label
+## # Label
 
 - The **human-facing** display name.
 - Derived automatically from the ID when possible.
@@ -62,7 +62,7 @@ Derivation rule (default):
 
 ---
 
-## 1) Shape
+# # 1) Shape
 
 - **Scalar** _(one value, no structure)_
   - `string`
@@ -89,7 +89,7 @@ Derivation rule (default):
 
 ---
 
-## 2) TypeScript type families (what they are)
+# # 2) TypeScript type families (what they are)
 
 - `string`
   - Text, identifiers, dates/times encoded as strings, URLs, emails, colors.
@@ -106,7 +106,7 @@ Derivation rule (default):
 
 ---
 
-## 3) Presence and defaults (keep separate)
+# # 3) Presence and defaults (keep separate)
 
 These are _orthogonal_ to the TS type.
 
@@ -122,7 +122,7 @@ These are _orthogonal_ to the TS type.
   - Meaning: value assumed if missing.
   - Does **not** imply required.
 
-### Nullable (advanced, keep in mind)
+## # Nullable (advanced, keep in mind)
 
 You said you don’t typically use this, but keep it as a known option.
 
@@ -135,9 +135,9 @@ You said you don’t typically use this, but keep it as a known option.
 
 ---
 
-## 4) Common constraints (idea menu)
+# # 4) Common constraints (idea menu)
 
-### Text (`string`)
+## # Text (`string`)
 
 - `minLength`
 - `maxLength`
@@ -148,36 +148,36 @@ You said you don’t typically use this, but keep it as a known option.
 - `nonEmpty`
 - `unique` (across records)
 
-### Numbers (`number`)
+## # Numbers (`number`)
 
 - `integerOnly`
 - `min` / `max`
 - `exclusiveMin` / `exclusiveMax`
 - `multipleOf` (step)
 
-### Dates/times (usually `string`)
+## # Dates/times (usually `string`)
 
 - `minDate` / `maxDate`
 - `notInFuture`
 - `notInPast`
 
-### Lists (`T[]`)
+## # Lists (`T[]`)
 
 - `minItems` / `maxItems`
 - `uniqueItems`
 - `itemPattern` / `itemConstraints` (applies to each item)
 
-### Objects (`{...}`)
+## # Objects (`{...}`)
 
 - `noExtraKeys` (closed object)
 - `requiredKeys` (specific keys required)
 
-### Maps (`Record<string, T>`)
+## # Maps (`Record<string, T>`)
 
 - `keyPattern`
 - `maxKeys`
 
-### Cross-field (usually stays in notes)
+## # Cross-field (usually stays in notes)
 
 - `requiredIf`
 - `dependsOn`
@@ -186,7 +186,7 @@ You said you don’t typically use this, but keep it as a known option.
 
 ---
 
-## 5) Common UI components (idea menu)
+# # 5) Common UI components (idea menu)
 
 Text
 
@@ -257,7 +257,7 @@ Optional UI flags (keep lightweight)
 
 ---
 
-## 6) Identification and reference object conventions
+# # 6) Identification and reference object conventions
 
 If you use references as objects (instead of raw id strings), a common minimal
 shape is:
@@ -273,7 +273,7 @@ Example TS:
 
 ---
 
-## 7) Minimal field spec template
+# # 7) Minimal field spec template
 
 Order preference:
 
@@ -295,19 +295,18 @@ Order preference:
     component: <component>
   description: <optional semantic meaning>
   notes: <optional misc>
-```
 
 ---
 
-## 8) Examples
+# # 8) Examples
 
-### Short text name
+## # Short text name
 
 - id: name label: Name ts: string presence: required: true default: null
   constraints:
   - nonEmpty example: "Example name" ui: component: text description: notes:
 
-### Array of objects
+## # Array of objects
 
 - id: maintenance_events label: Maintenance Events ts: { date: string; note:
   string }[] presence: required: false default: [] constraints:
@@ -315,7 +314,7 @@ Order preference:
   - { date: "2025-10-01", note: "cleaned impeller" } ui: component: repeater
     description: notes: item.date is DateString
 
-### Map / dictionary
+## # Map / dictionary
 
 - id: labels label: Labels ts: Record\<string, string> presence: required: false
   default: {} constraints:
@@ -325,7 +324,7 @@ Order preference:
 
 ---
 
-## 9) Guided interview flow (quick, conversational)
+# # 9) Guided interview flow (quick, conversational)
 
 Default behavior:
 
@@ -351,7 +350,7 @@ Notes:
 
 ---
 
-## 10) Quiz note (future use)
+# # 10) Quiz note (future use)
 
 This spec can also be used as a guided quiz:
 
@@ -363,3 +362,4 @@ Future extension (deferred):
 
 - Add a final platform step (Airtable/Appsmith/etc.) to suggest equivalent field
   types and constraints.
+```

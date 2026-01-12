@@ -1,4 +1,4 @@
-# Descision Tree
+# Decision Tree
 
 ```mermaid
 flowchart TD

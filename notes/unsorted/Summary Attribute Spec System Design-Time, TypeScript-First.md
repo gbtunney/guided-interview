@@ -1,4 +1,4 @@
-- bute Spec System (Design-Time, TypeScript-First)
+# Summary Attribute Spec System (Design-Time, TypeScript-First)
 
 Goal
 
@@ -141,9 +141,8 @@ data_obj:
       description: <optional semantic meaning>
 
       notes: <optional misc>
-```
 
-### Guided Interview / Conversational Flow
+## # Guided Interview / Conversational Flow
 
 We designed a non-rigid, AI-assisted interview that:
 
@@ -161,7 +160,6 @@ We designed a non-rigid, AI-assisted interview that:
 6. Description (optional)
 7. Emit spec
 
--
 
 Nullable, UI flags, and platform mappings are intentionally not part of the
 default flow.
@@ -184,3 +182,4 @@ You now have:
 - A conversational way to generate specs without tooling
 
 This is a solid stopping point and a clean place to start a new thread.
+```

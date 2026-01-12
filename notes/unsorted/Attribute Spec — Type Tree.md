@@ -6,7 +6,7 @@ This is intentionally plain Markdown, not a schema language.
 
 ---
 
-## Table of Contents
+# # Table of Contents
 
 1. Vocabulary
 2. ID and Label (Naming Conventions)
@@ -23,9 +23,9 @@ This is intentionally plain Markdown, not a schema language.
 
 ---
 
-## 1. Vocabulary
+# # 1. Vocabulary
 
-### Scalar
+## # Scalar
 
 - A single value.
 - Not nested, not iterable, not a container.
@@ -33,7 +33,7 @@ This is intentionally plain Markdown, not a schema language.
 **Examples:** string, number, boolean, null, literal unions like 'a' | 'b'.  
 **Non-examples:** objects, lists, maps.
 
-### Object vs Map / Dictionary
+## # Object vs Map / Dictionary
 
 - **Object:** Known fields, fixed meaning per field.  
   Example: { id: string; name: string }
@@ -47,9 +47,9 @@ This is intentionally plain Markdown, not a schema language.
 
 ---
 
-## 2. ID and Label (Naming Conventions)
+# # 2. ID and Label (Naming Conventions)
 
-### ID
+## # ID
 
 - The machine identifier for the field.
 - Prefer stable and boring.
@@ -59,7 +59,7 @@ This is intentionally plain Markdown, not a schema language.
   - camelCase (e.g. productId)
   - PascalCase (e.g. ProductId)
 
-### Label
+## # Label
 
 - The human-facing display name.
 - Derived automatically from the ID when possible.
@@ -71,7 +71,7 @@ This is intentionally plain Markdown, not a schema language.
 
 ---
 
-## 3. Shape
+# # 3. Shape
 
 - **Scalar (one value, no structure):**
   - string
@@ -94,7 +94,7 @@ This is intentionally plain Markdown, not a schema language.
 
 ---
 
-## 4. TypeScript Type Families
+# # 4. TypeScript Type Families
 
 - **string:** Text, identifiers, dates/times encoded as strings, URLs, emails,
   colors.
@@ -106,7 +106,7 @@ This is intentionally plain Markdown, not a schema language.
 
 ---
 
-## 5. Presence and Defaults
+# # 5. Presence and Defaults
 
 These are orthogonal to the TS type.
 
@@ -114,16 +114,16 @@ These are orthogonal to the TS type.
 - **Optional:** The field may be absent. (TS: field?: T)
 - **Default:** Value assumed if missing. Does not imply required.
 
-### Nullable (Advanced)
+## # Nullable (Advanced)
 
 - **Nullable:** Field may explicitly be null. (TS: field: T | null)
 - **Optional + Nullable:** (TS: field?: T | null)
 
 ---
 
-## 6. Common Constraints
+# # 6. Common Constraints
 
-### Text (string)
+## # Text (string)
 
 - minLength
 - maxLength
@@ -134,36 +134,36 @@ These are orthogonal to the TS type.
 - nonEmpty
 - unique (across records)
 
-### Numbers (number)
+## # Numbers (number)
 
 - integerOnly
 - min / max
 - exclusiveMin / exclusiveMax
 - multipleOf (step)
 
-### Dates/times (usually string)
+## # Dates/times (usually string)
 
 - minDate / maxDate
 - notInFuture
 - notInPast
 
-### Lists (T[])
+## # Lists (T[])
 
 - minItems / maxItems
 - uniqueItems
 - itemPattern / itemConstraints (applies to each item)
 
-### Objects ({...})
+## # Objects ({...})
 
 - noExtraKeys (closed object)
 - requiredKeys (specific keys required)
 
-### Maps (Record<string, T>)
+## # Maps (Record<string, T>)
 
 - keyPattern
 - maxKeys
 
-### Cross-field (usually stays in notes)
+## # Cross-field (usually stays in notes)
 
 - requiredIf
 - dependsOn
@@ -172,16 +172,16 @@ These are orthogonal to the TS type.
 
 ---
 
-## 7. Common UI Components
+# # 7. Common UI Components
 
-### Text
+## # Text
 
 - text
 - textarea
 - markdown-editor
 - richtext
 
-### Choice
+## # Choice
 
 - select
 - multi-select
@@ -190,48 +190,48 @@ These are orthogonal to the TS type.
 - segmented-control
 - combobox (searchable select)
 
-### Boolean
+## # Boolean
 
 - switch
 - checkbox
 
-### Numbers
+## # Numbers
 
 - number-input
 - slider
 - stepper
 
-### Dates/times
+## # Dates/times
 
 - date-picker
 - time-picker
 - datetime-picker
 - duration-input
 
-### References
+## # References
 
 - entity-picker
 - autocomplete
 - tag-input (chips)
 
-### Collections
+## # Collections
 
 - repeater (add/remove rows)
 - table-editor
 - key-value-editor
 
-### Files
+## # Files
 
 - file-upload
 - image-upload
 
-### Display-only
+## # Display-only
 
 - read-only-text
 - badge
 - json-viewer
 
-### Optional UI Flags
+## # Optional UI Flags
 
 - readOnly
 - disabled
@@ -243,7 +243,7 @@ These are orthogonal to the TS type.
 
 ---
 
-## 8. Identification and Reference Object Conventions
+# # 8. Identification and Reference Object Conventions
 
 If you use references as objects (instead of raw id strings), a common minimal
 shape is:
@@ -258,7 +258,7 @@ type Ref = { id: string; label?: string; type?: string }
 
 ---
 
-## 9. Minimal Field Spec Template
+# # 9. Minimal Field Spec Template
 
 Order preference:
 
@@ -280,65 +280,64 @@ ui:
   component: <component>
 description: <optional semantic meaning>
 notes: <optional misc>
-```
 
 ---
 
-## 10. Examples
+# # 10. Examples
 
-### Short Text Name
+## # Short Text Name
 
-- id: name  
-  label: Name  
-  ts: string  
-  presence:  
-   required: true  
-   default: null  
+- id: name
+  label: Name
+  ts: string
+  presence:
+   required: true
+   default: null
   constraints:
-  - nonEmpty  
-    example: “Example name”  
-    ui:  
-     component: text  
-    description:  
+  - nonEmpty
+    example: “Example name”
+    ui:
+     component: text
+    description:
     notes:
 
-### Array of Objects
+## # Array of Objects
 
-- id: maintenance_events  
-  label: Maintenance Events  
-  ts: { date: string; note: string }[]  
-  presence:  
-   required: false  
-   default: []  
+- id: maintenance_events
+  label: Maintenance Events
+  ts: { date: string; note: string }[]
+  presence:
+   required: false
+   default: []
   constraints:
-  - maxItems: 200  
+  - maxItems: 200
     example:
-  - { date: “2025-10-01”, note: “cleaned impeller” }  
-    ui:  
-     component: repeater  
-    description:  
+  - { date: “2025-10-01”, note: “cleaned impeller” }
+    ui:
+     component: repeater
+    description:
     notes: item.date is DateString
 
-### Map / Dictionary
+## # Map / Dictionary
 
-- id: labels  
-  label: Labels  
-  ts: Record<string, string>  
-  presence:  
-   required: false  
-   default: {}  
+- id: labels
+  label: Labels
+  ts: Record<string, string>
+  presence:
+   required: false
+   default: {}
   constraints:
   - keyPattern: ^[a-z0-9-]+$
-  - maxKeys: 50  
-    example: { location: “living-room” }  
-    ui:  
-     component: key-value-editor  
-    description:  
+  - maxKeys: 50
+    example: { location: “living-room” }
+    ui:
+     component: key-value-editor
+    description:
     notes: keys are slug-like
 
 ---
 
-## 11. Guided Interview Flow
+# # 11. Guided Interview Flow
 
 **Default behavior:**
 
@@ -363,4 +362,4 @@ notes: <optional misc>
 
 ---
 
-T
+```

@@ -1,4 +1,4 @@
-Equipment Inventory – Single Source of Truth
+# Equipment Inventory – Single Source of Truth
 
 This document consolidates **schema, field order, AI extraction, automations,
 and slug rules** into one canonical spec. Treat this as the only document you
@@ -6,37 +6,37 @@ maintain going forward.
 
 ---
 
-## Equipment Table – Final Field Order
+# # Equipment Table – Final Field Order
 
-### Primary / Identity
+## # Primary / Identity
 
 1. **Name** (PRIMARY, text)
 2. **Slug** (text or formula – see Slug Rules)
 3. **Thumbnail** (attachment/helper)
 4. **Status** (single select)
 
-### Product Info (authoritative)
+## # Product Info (authoritative)
 
 1. **Category** (single select: Tank, Pump, Filter, Heater, Light, Sensor, Tool,
    Other)
-2. **Product Name** (text)
-3. **Brand** (single select)
-4. **Model** (text)
-5. **Serial #** (text)
-6. **Specs** (long text; canonical; JSON or key/value)
-7. **Purchased From** (single select: Amazon, Chewy, LFS, Other)
+1. **Product Name** (text)
+1. **Brand** (single select)
+1. **Model** (text)
+1. **Serial #** (text)
+1. **Specs** (long text; canonical; JSON or key/value)
+1. **Purchased From** (single select: Amazon, Chewy, LFS, Other)
 
-### Relationships & Notes
+## # Relationships & Notes
 
 1. **Connected Equipment** (link → Equipment)
 2. **Notes** (long text)
 
-### Media / Assistive
+## # Media / Assistive
 
 1. **Photo** (attachment)
 2. **Docs / Photos** (attachment, multiple allowed)
 
-### AI-Derived (assistive only)
+## # AI-Derived (assistive only)
 
 1. **Specs & Category (from Photo)** (AI-generated)
 2. **AI Extract (JSON)** (AI-generated)
@@ -46,17 +46,16 @@ maintain going forward.
 
 ---
 
-## Slug Rules (choose ONE)
+# # Slug Rules (choose ONE)
 
-### Option A: Formula slug (auto-updating)
+## # Option A: Formula slug (auto-updating)
 
 Use if slug does NOT need to be stable.
 
-```text
+````text
 LOWER(SUBSTITUTE(TRIM({Name}), " ", "-"))
-```
 
-### Option B: Stable slug (recommended for HA/API)
+## # Option B: Stable slug (recommended for HA/API)
 
 Use if slug must remain stable.
 
@@ -66,7 +65,7 @@ Use if slug must remain stable.
 
 ---
 
-## Automation 1: AI Extraction → JSON
+# # Automation 1: AI Extraction → JSON
 
 **Trigger**
 
@@ -86,7 +85,7 @@ Use if slug must remain stable.
 
 ---
 
-## Automation 2: Parse JSON → Canonical Fields (safe fill)
+# # Automation 2: Parse JSON → Canonical Fields (safe fill)
 
 **Trigger**
 
@@ -108,7 +107,7 @@ Use if slug must remain stable.
 
 ---
 
-## Automation 3: Backfill Name from Product Name
+# # Automation 3: Backfill Name from Product Name
 
 **Goal** If `Name` is empty and AI extraction succeeded, set
 `Name = Product Name`.
@@ -132,7 +131,7 @@ Use if slug must remain stable.
 
 ---
 
-## Canonical vs AI Fields (hard rule)
+# # Canonical vs AI Fields (hard rule)
 
 - **Canonical (authoritative):** Category, Product Name, Brand, Model, Serial #,
   Specs, Purchased From, Name, Slug
@@ -144,7 +143,7 @@ AI fields never silently override canonical fields.
 
 ---
 
-## Future (Planned, not implemented)
+# # Future (Planned, not implemented)
 
 - Areas table (Home Assistant mapping)
 - Equipment → Area link
@@ -153,7 +152,7 @@ AI fields never silently override canonical fields.
 
 ---
 
-## Design Principles (non-negotiable)
+# # Design Principles (non-negotiable)
 
 - One source of truth
 - AI suggests, humans approve
@@ -162,7 +161,7 @@ AI fields never silently override canonical fields.
 
 ---
 
-## Airtable AI — **Authoritative Instructions to Rebuild Tables from This Spec**
+# # Airtable AI — **Authoritative Instructions to Rebuild Tables from This Spec**
 
 Paste the following **verbatim** into Airtable AI ("Describe what you want to
 build" / "Instructions" box). This is written as an execution contract, not
@@ -170,7 +169,7 @@ prose.
 
 ---
 
-### 🔒 SYSTEM INSTRUCTIONS (DO NOT SUMMARIZE, DO NOT OMIT)
+## # 🔒 SYSTEM INSTRUCTIONS (DO NOT SUMMARIZE, DO NOT OMIT)
 
 You are an Airtable AI agent tasked with **rebuilding and aligning tables
 exactly to the specification below**. This specification is authoritative. Do
@@ -183,7 +182,7 @@ AI‑derived fields must NEVER overwrite canonical (manual) fields automatically
 
 ---
 
-### 🎯 OBJECTIVE
+## # 🎯 OBJECTIVE
 
 Create or update an Airtable base to match the **Equipment Inventory – Single
 Source of Truth** specification, including:
@@ -196,11 +195,11 @@ Source of Truth** specification, including:
 
 ---
 
-## 📘 TABLE: Equipment
+# # 📘 TABLE: Equipment
 
 Create a table named **Equipment** with the following fields, in this order:
 
-### 1. Primary / Identity
+## # 1. Primary / Identity
 
 1. **Name** — single line text (PRIMARY field)
 2. **Slug** — text (NOT formula unless instructed later)
@@ -209,32 +208,32 @@ Create a table named **Equipment** with the following fields, in this order:
    - Options: In Use, Spare, Broken, Retired
    - Default: Spare
 
-### 2. Product Info (Canonical / Manual)
+## # 2. Product Info (Canonical / Manual)
 
 1. **Category** — single select
    - Options: Tank, Pump, Filter, Heater, Light, Sensor, Tool, Other
    - Default: Other
-2. **Product Name** — single line text
-3. **Brand** — single select
-4. **Model** — single line text
-5. **Serial #** — single line text
-6. **Specs** — long text (canonical; JSON or key/value allowed)
-7. **Purchased From** — single select
+1. **Product Name** — single line text
+2. **Brand** — single select
+3. **Model** — single line text
+4. **Serial #** — single line text
+5. **Specs** — long text (canonical; JSON or key/value allowed)
+6. **Purchased From** — single select
 
 - Options: Amazon, Chewy, LFS, Other, Unknown
 - Default: Unknown
 
-### 3. Relationships & Notes
+## # 3. Relationships & Notes
 
 1. **Connected Equipment** — link to another record → Equipment (self‑link)
 2. **Notes** — long text
 
-### 4. Media / Assistive Inputs
+## # 4. Media / Assistive Inputs
 
 1. **Photo** — attachment
 2. **Docs / Photos** — attachment (multiple allowed)
 
-### 5. AI‑Derived (Assistive ONLY — never authoritative)
+## # 5. AI‑Derived (Assistive ONLY — never authoritative)
 
 1. **Specs & Category (from Photo)** — AI‑generated text
 2. **AI Extract (JSON)** — AI‑generated text
@@ -247,13 +246,13 @@ Create a table named **Equipment** with the following fields, in this order:
 
 ---
 
-## 🤖 AI EXTRACTION RULES
+# # 🤖 AI EXTRACTION RULES
 
 - AI may read **Docs / Photos** and **Photo** attachments
 - AI must output **strict JSON** into `AI Extract (JSON)`
 - AI must NEVER write directly to canonical fields
 
-### JSON schema required from AI Extract (JSON)
+## # JSON schema required from AI Extract (JSON)
 
 ```json
 {
@@ -267,11 +266,11 @@ Create a table named **Equipment** with the following fields, in this order:
   "confidence": "High" | "Medium" | "Low",
   "evidence": string[]
 }
-```
+````
 
 ---
 
-## ⚙️ REQUIRED AUTOMATION COMPATIBILITY
+# # ⚙️ REQUIRED AUTOMATION COMPATIBILITY
 
 The table MUST support the following automations (do not implement unless asked,
 but ensure compatibility):
@@ -280,20 +279,20 @@ but ensure compatibility):
    - Trigger: Docs / Photos updated
    - Action: Populate `AI Extract (JSON)`
 
-2. **Safe Parse Automation**
+1. **Safe Parse Automation**
    - Trigger: AI Extract (JSON) updated
    - Action: Copy values into canonical fields ONLY if blank
 
-3. **Name Backfill Automation**
+1. **Name Backfill Automation**
    - If Name is blank AND Product Name exists AND AI Extract exists → set Name =
      Product Name
 
-4. **Slug Automation (optional)**
+1. **Slug Automation (optional)**
    - Slug set once from Name if empty
 
 ---
 
-## ⛔ NON‑NEGOTIABLE RULES
+# # ⛔ NON‑NEGOTIABLE RULES
 
 - Do NOT collapse fields
 - Do NOT rename fields
@@ -303,6 +302,6 @@ but ensure compatibility):
 
 ---
 
-### ✅ END OF SPEC
+## # ✅ END OF SPEC
 
 Confirm understanding before making changes.

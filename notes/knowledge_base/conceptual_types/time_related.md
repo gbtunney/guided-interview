@@ -1,19 +1,18 @@
-## Time-Related Conceptual Types
+# # Time-Related Conceptual Types
 
 Time-related concepts are often confused. They are **siblings**, not
 parent/child.
 
-```txt
+````txt
 Time-related
 ├─ Date
 ├─ DateTime
 ├─ Duration
 └─ Interval
-```
 
 ---
 
-## Date
+# # Date
 
 **What it represents:**
 
@@ -37,7 +36,7 @@ Time-related
 
 ---
 
-## DateTime
+# # DateTime
 
 **What it represents:**
 
@@ -62,9 +61,9 @@ Time-related
 
 ---
 
-## Duration
+# # Duration
 
-##### What it represents
+#### # What it represents
 
 - A length of time
 
@@ -84,14 +83,14 @@ Time-related
    - milliseconds or seconds
    - Example: `3600000` (1 hour)
 
-2. **ISO 8601 duration string**
+1. **ISO 8601 duration string**
    - Example: `PT30M`, `P7D`
 
-3. **Structured object**
+1. **Structured object**
 
    ```ts
    { value: 5, unit: 'minutes' }
-   ```
+````
 
 **Typical UI:**
 
@@ -101,7 +100,7 @@ Time-related
 
 ---
 
-## Interval (for completeness)
+# # Interval (for completeness)
 
 **What it represents:**
 
@@ -117,7 +116,7 @@ Time-related
 
 ---
 
-## Key Distinctions (Summary Table)
+# # Key Distinctions (Summary Table)
 
 | Concept  | Answers            | Example             |
 | -------- | ------------------ | ------------------- |
@@ -128,7 +127,7 @@ Time-related
 
 ---
 
-## How This Fits Your System
+# # How This Fits Your System
 
 Originally, conceptual types were an **explicit layer**.
 

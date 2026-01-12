@@ -1,6 +1,6 @@
 # Schema Types
 
-## Conceptual Types
+# # Conceptual Types
 
 A **conceptual type** describes **what something is in the real world**,
 independent of how it is stored, transmitted, or rendered. It is **conceptual
@@ -30,7 +30,7 @@ Examples:
 
 ---
 
-## Technical (Raw) Types
+# # Technical (Raw) Types
 
 A **technical type** (sometimes called _raw_ or _storage_ type) describes **how
 a value is represented** in code or data.
@@ -47,7 +47,7 @@ A single conceptual type may map to multiple technical types.
 
 ---
 
-## UI / Interaction Types
+# # UI / Interaction Types
 
 A **UI type** describes **how a human interacts** with the value.
 
@@ -64,7 +64,7 @@ UI types are _affordances_, not data definitions.
 
 ---
 
-## Why Separate These Layers?
+# # Why Separate These Layers?
 
 Because they change at different rates:
 

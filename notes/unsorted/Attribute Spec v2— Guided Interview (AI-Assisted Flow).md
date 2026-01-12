@@ -1,4 +1,4 @@
-Attribute Spec — Guided Interview (AI-Assisted Flow)
+# Attribute Spec — Guided Interview (AI-Assisted Flow)
 
 This document defines the conversational, AI-guided interview process used to
 produce field or object specs that conform to the Attribute Spec cheat sheet.
@@ -67,19 +67,19 @@ User may start with any one of the following:
 
 1.
 
-2. Rough idea / intent
+1. Rough idea / intent
 
 - e.g. “a date when it was installed”
 
 1.
 
-2. UI-first choice
+1. UI-first choice
 
 - e.g. “date picker”, “checkbox”, “dropdown”
 
 1.
 
-2. Type-first hint
+1. Type-first hint
 
 - e.g. string, number, list, “enum”
 
@@ -174,8 +174,6 @@ Because ChatGPT cannot push files automatically:
 
 - copying from Canvas
 - or saving from your editor
-
--
 
 Future Extensions (Deferred)
 
