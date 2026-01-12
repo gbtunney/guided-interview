@@ -1,6 +1,6 @@
 {
     "name": "@gbt/root",
-    "version": "0,0,0",
+    "version": "0.0.0",
     "private": true,
     "description": "Boilerplate for monorepo root",
     "scripts": {
@@ -8,8 +8,8 @@
         "commit": "pnpm run commit:before && pnpm commit:cz",
         "commit:cz": "pnpm exec git-cz",
         "commit:before": "pnpm build:self && pnpm run lint:staged",
-        "commit:build-config": "pnpm nx:build:config && pnpm build:self && pnpm exec git-cz",
         "lint:staged": "pnpm exec lint-staged --relative --debug",
+        "commit:direct": "git commit --no-verify -m",
         "lint:all": "pnpm fix && pnpm build",
         "\n========== INSPECT >>==========": "",
         "inspect:lint": "pnpm exec eslint  --inspect-config ",
