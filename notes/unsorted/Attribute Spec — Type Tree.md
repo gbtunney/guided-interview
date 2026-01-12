@@ -1,15 +1,12 @@
-Here’s your cleaned-up document with high-level article headings, a tidy ending, and all conversational/junk bits removed:
-
----
-
 # Attribute Spec — Type Tree (TypeScript-first)
 
-Use this as a design-time picker. Choose the shape, write the TypeScript type, then add lightweight notes for constraints and UI.  
+Use this as a design-time picker. Choose the shape, write the TypeScript type,
+then add lightweight notes for constraints and UI.  
 This is intentionally plain Markdown, not a schema language.
 
 ---
 
-## Table of Contents
+# # Table of Contents
 
 1. Vocabulary
 2. ID and Label (Naming Conventions)
@@ -26,9 +23,9 @@ This is intentionally plain Markdown, not a schema language.
 
 ---
 
-## 1. Vocabulary
+# # 1. Vocabulary
 
-### Scalar
+## # Scalar
 
 - A single value.
 - Not nested, not iterable, not a container.
@@ -36,68 +33,71 @@ This is intentionally plain Markdown, not a schema language.
 **Examples:** string, number, boolean, null, literal unions like 'a' | 'b'.  
 **Non-examples:** objects, lists, maps.
 
-### Object vs Map / Dictionary
+## # Object vs Map / Dictionary
 
 - **Object:** Known fields, fixed meaning per field.  
   Example: { id: string; name: string }
 - **Map / Dictionary:** Variable keys, uniform value type.  
   Example: Record<string, string> where keys are data.
 
-**Rule of thumb:**  
-- If keys are part of the schema → Object  
+**Rule of thumb:**
+
+- If keys are part of the schema → Object
 - If keys are part of the data → Map
 
 ---
 
-## 2. ID and Label (Naming Conventions)
+# # 2. ID and Label (Naming Conventions)
 
-### ID
+## # ID
 
 - The machine identifier for the field.
 - Prefer stable and boring.
-- Common styles:  
+- Common styles:
   - snake_case (e.g. product_id)
   - kebab-case (e.g. product-id)
   - camelCase (e.g. productId)
   - PascalCase (e.g. ProductId)
 
-### Label
+## # Label
 
 - The human-facing display name.
 - Derived automatically from the ID when possible.
 
-**Derivation rule (default):**  
-- product_id / product-id / productId → “Product ID”  
+**Derivation rule (default):**
+
+- product_id / product-id / productId → “Product ID”
 - “Product ID” → product_id (default: snake_case)
 
 ---
 
-## 3. Shape
+# # 3. Shape
 
-- **Scalar (one value, no structure):**  
+- **Scalar (one value, no structure):**
   - string
   - number
   - boolean
   - null (rare; prefer T | null)
-- **Enum (scalar with a fixed allowed set):**  
+- **Enum (scalar with a fixed allowed set):**
   - string literal union: 'a' | 'b' | 'c'
   - number literal union: 1 | 2 | 3
-- **Object (fixed structure, known fields):**  
+- **Object (fixed structure, known fields):**
   - inline: { ... }
   - named: type X = { ... }
-- **List (ordered collection of items):**  
+- **List (ordered collection of items):**
   - array: T[]
   - readonly array: readonly T[]
   - tuple (fixed length): [T1, T2]
-- **Map / Dictionary (key → value lookup, variable keys):**  
+- **Map / Dictionary (key → value lookup, variable keys):**
   - Record<string, T>
   - Record<'k1' | 'k2', T> (known key set, still map-shaped)
 
 ---
 
-## 4. TypeScript Type Families
+# # 4. TypeScript Type Families
 
-- **string:** Text, identifiers, dates/times encoded as strings, URLs, emails, colors.
+- **string:** Text, identifiers, dates/times encoded as strings, URLs, emails,
+  colors.
 - **number:** Counts, measurements, percentages, timestamps.
 - **boolean:** True/false flags.
 - **{ ... }:** Structured object with named fields.
@@ -106,7 +106,7 @@ This is intentionally plain Markdown, not a schema language.
 
 ---
 
-## 5. Presence and Defaults
+# # 5. Presence and Defaults
 
 These are orthogonal to the TS type.
 
@@ -114,16 +114,16 @@ These are orthogonal to the TS type.
 - **Optional:** The field may be absent. (TS: field?: T)
 - **Default:** Value assumed if missing. Does not imply required.
 
-### Nullable (Advanced)
+## # Nullable (Advanced)
 
 - **Nullable:** Field may explicitly be null. (TS: field: T | null)
 - **Optional + Nullable:** (TS: field?: T | null)
 
 ---
 
-## 6. Common Constraints
+# # 6. Common Constraints
 
-### Text (string)
+## # Text (string)
 
 - minLength
 - maxLength
@@ -134,36 +134,36 @@ These are orthogonal to the TS type.
 - nonEmpty
 - unique (across records)
 
-### Numbers (number)
+## # Numbers (number)
 
 - integerOnly
 - min / max
 - exclusiveMin / exclusiveMax
 - multipleOf (step)
 
-### Dates/times (usually string)
+## # Dates/times (usually string)
 
 - minDate / maxDate
 - notInFuture
 - notInPast
 
-### Lists (T[])
+## # Lists (T[])
 
 - minItems / maxItems
 - uniqueItems
 - itemPattern / itemConstraints (applies to each item)
 
-### Objects ({...})
+## # Objects ({...})
 
 - noExtraKeys (closed object)
 - requiredKeys (specific keys required)
 
-### Maps (Record<string, T>)
+## # Maps (Record<string, T>)
 
 - keyPattern
 - maxKeys
 
-### Cross-field (usually stays in notes)
+## # Cross-field (usually stays in notes)
 
 - requiredIf
 - dependsOn
@@ -172,16 +172,16 @@ These are orthogonal to the TS type.
 
 ---
 
-## 7. Common UI Components
+# # 7. Common UI Components
 
-### Text
+## # Text
 
 - text
 - textarea
 - markdown-editor
 - richtext
 
-### Choice
+## # Choice
 
 - select
 - multi-select
@@ -190,48 +190,48 @@ These are orthogonal to the TS type.
 - segmented-control
 - combobox (searchable select)
 
-### Boolean
+## # Boolean
 
 - switch
 - checkbox
 
-### Numbers
+## # Numbers
 
 - number-input
 - slider
 - stepper
 
-### Dates/times
+## # Dates/times
 
 - date-picker
 - time-picker
 - datetime-picker
 - duration-input
 
-### References
+## # References
 
 - entity-picker
 - autocomplete
 - tag-input (chips)
 
-### Collections
+## # Collections
 
 - repeater (add/remove rows)
 - table-editor
 - key-value-editor
 
-### Files
+## # Files
 
 - file-upload
 - image-upload
 
-### Display-only
+## # Display-only
 
 - read-only-text
 - badge
 - json-viewer
 
-### Optional UI Flags
+## # Optional UI Flags
 
 - readOnly
 - disabled
@@ -243,9 +243,10 @@ These are orthogonal to the TS type.
 
 ---
 
-## 8. Identification and Reference Object Conventions
+# # 8. Identification and Reference Object Conventions
 
-If you use references as objects (instead of raw id strings), a common minimal shape is:
+If you use references as objects (instead of raw id strings), a common minimal
+shape is:
 
 - **Ref**
   - id: string (required)
@@ -257,7 +258,7 @@ type Ref = { id: string; label?: string; type?: string }
 
 ---
 
-## 9. Minimal Field Spec Template
+# # 9. Minimal Field Spec Template
 
 Order preference:
 
@@ -265,7 +266,7 @@ Order preference:
 - Use ID (not “field”).
 - Description is optional (semantic meaning), separate from notes.
 
-```
+```yaml
 id: <id>
 label: <derived or explicit>
 ts: <TypeScript type>
@@ -279,65 +280,64 @@ ui:
   component: <component>
 description: <optional semantic meaning>
 notes: <optional misc>
-```
 
 ---
 
-## 10. Examples
+# # 10. Examples
 
-### Short Text Name
+## # Short Text Name
 
-- id: name  
-  label: Name  
-  ts: string  
-  presence:  
-    required: true  
-    default: null  
-  constraints:  
-    - nonEmpty  
-  example: “Example name”  
-  ui:  
-    component: text  
-  description:  
-  notes:
+- id: name
+  label: Name
+  ts: string
+  presence:
+   required: true
+   default: null
+  constraints:
+  - nonEmpty
+    example: “Example name”
+    ui:
+     component: text
+    description:
+    notes:
 
-### Array of Objects
+## # Array of Objects
 
-- id: maintenance_events  
-  label: Maintenance Events  
-  ts: { date: string; note: string }[]  
-  presence:  
-    required: false  
-    default: []  
-  constraints:  
-    - maxItems: 200  
-  example:
-    - { date: “2025-10-01”, note: “cleaned impeller” }  
-  ui:  
-    component: repeater  
-  description:  
-  notes: item.date is DateString
+- id: maintenance_events
+  label: Maintenance Events
+  ts: { date: string; note: string }[]
+  presence:
+   required: false
+   default: []
+  constraints:
+  - maxItems: 200
+    example:
+  - { date: “2025-10-01”, note: “cleaned impeller” }
+    ui:
+     component: repeater
+    description:
+    notes: item.date is DateString
 
-### Map / Dictionary
+## # Map / Dictionary
 
-- id: labels  
-  label: Labels  
-  ts: Record<string, string>  
-  presence:  
-    required: false  
-    default: {}  
-  constraints:  
-    - keyPattern: ^[a-z0-9-]+$
-    - maxKeys: 50  
-  example: { location: “living-room” }  
-  ui:  
-    component: key-value-editor  
-  description:  
-  notes: keys are slug-like
+- id: labels
+  label: Labels
+  ts: Record<string, string>
+  presence:
+   required: false
+   default: {}
+  constraints:
+  - keyPattern: ^[a-z0-9-]+$
+  - maxKeys: 50
+    example: { location: “living-room” }
+    ui:
+     component: key-value-editor
+    description:
+    notes: keys are slug-like
 
 ---
 
-## 11. Guided Interview Flow
+# # 11. Guided Interview Flow
 
 **Default behavior:**
 
@@ -362,4 +362,4 @@ notes: <optional misc>
 
 ---
 
-T
+```

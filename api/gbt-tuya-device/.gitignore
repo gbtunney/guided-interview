@@ -1,6 +1,0 @@
-# System
-.ssh
-.env
-*.env
-.venv
-.venv/lib/python3.8/site-packages/urllib3/contrib/emscripten/emscripten_fetch_worker.js

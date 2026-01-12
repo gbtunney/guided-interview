@@ -1,3 +1,5 @@
+# Decision Tree
+
 ```mermaid
 flowchart TD
   A[Start sketch a field] --> B{What do you know first?}
@@ -14,7 +16,7 @@ flowchart TD
 Default ID style snake_case]
   N1 -->|Yes| N3[Keep as provided]
   N2 --> R0
-  N3 --> R0
+  N3 -->   R0
 
   %% UI-first inference
   C2 --> U1[Infer shape and TS type
@@ -65,4 +67,3 @@ Include final spec
 Place in Canvas]
   Z2 -->|No| Z4[Done]
 ```
-
