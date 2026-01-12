@@ -1,6 +1,7 @@
 # Attribute Spec — Type Tree (TypeScript-first)
 
-Use this as a *design-time* picker. Choose the **shape**, write the **TypeScript type**, then add lightweight notes for constraints + UI.
+Use this as a _design-time_ picker. Choose the **shape**, write the **TypeScript
+type**, then add lightweight notes for constraints + UI.
 
 This is intentionally **plain Markdown**, not a schema language.
 
@@ -26,12 +27,12 @@ Non-examples:
 - **Object**: known fields, fixed meaning per field.
   - Example: `{ id: string; name: string }`
 - **Map / Dictionary**: variable keys, uniform value type.
-  - Example: `Record<string, string>` where keys are *data*.
+  - Example: `Record<string, string>` where keys are _data_.
 
 Rule of thumb:
 
-- If keys are part of the *schema* → **Object**
-- If keys are part of the *data* → **Map**
+- If keys are part of the _schema_ → **Object**
+- If keys are part of the _data_ → **Map**
 
 ---
 
@@ -54,40 +55,37 @@ Rule of thumb:
 
 Derivation rule (default):
 
-- If you give an ID like `product_id` or `product-id` or `productId`, the label becomes **"Product ID"**.
-- If you give a label like **"Product ID"**, the ID becomes \`\` (default style: snake\_case).
+- If you give an ID like `product_id` or `product-id` or `productId`, the label
+  becomes **"Product ID"**.
+- If you give a label like **"Product ID"**, the ID becomes \`\` (default style:
+  snake_case).
 
 ---
 
 ## 1) Shape
 
-- **Scalar** *(one value, no structure)*
-
+- **Scalar** _(one value, no structure)_
   - `string`
   - `number`
   - `boolean`
-  - `null` *(rare; prefer ****T | null****)*
+  - `null` _(rare; prefer \***\*T | null\*\***)_
 
-- **Enum** *(scalar with a fixed allowed set)*
-
+- **Enum** _(scalar with a fixed allowed set)_
   - string literal union: `'a' | 'b' | 'c'`
   - number literal union: `1 | 2 | 3`
 
-- **Object** *(fixed structure, known fields)*
-
+- **Object** _(fixed structure, known fields)_
   - inline: `{ ... }`
   - named: `type X = { ... }`
 
-- **List** *(ordered collection of items)*
-
+- **List** _(ordered collection of items)_
   - array: `T[]`
   - readonly array: `readonly T[]`
   - tuple (fixed length): `[T1, T2]`
 
-- **Map / Dictionary** *(key → value lookup, variable keys)*
-
+- **Map / Dictionary** _(key → value lookup, variable keys)_
   - `Record<string, T>`
-  - `Record<'k1' | 'k2', T>` *(known key set, still map-shaped)*
+  - `Record<'k1' | 'k2', T>` _(known key set, still map-shaped)_
 
 ---
 
@@ -110,20 +108,17 @@ Derivation rule (default):
 
 ## 3) Presence and defaults (keep separate)
 
-These are *orthogonal* to the TS type.
+These are _orthogonal_ to the TS type.
 
 - **Required**
-
   - Meaning: the field must be present in the object.
   - Typical TS: omit `?` (no optional marker)
 
 - **Optional**
-
   - Meaning: the field may be absent.
   - Typical TS: `field?: T`
 
 - **Default**
-
   - Meaning: value assumed if missing.
   - Does **not** imply required.
 
@@ -132,12 +127,10 @@ These are *orthogonal* to the TS type.
 You said you don’t typically use this, but keep it as a known option.
 
 - **Nullable**
-
   - Meaning: the field may explicitly be `null`.
   - Typical TS: `field: T | null`
 
 - **Optional + Nullable**
-
   - Typical TS: `field?: T | null`
 
 ---
@@ -266,12 +259,13 @@ Optional UI flags (keep lightweight)
 
 ## 6) Identification and reference object conventions
 
-If you use references as objects (instead of raw id strings), a common minimal shape is:
+If you use references as objects (instead of raw id strings), a common minimal
+shape is:
 
 - `Ref`
-  - `id: string` *(required)*
-  - `label?: string` *(optional display label)*
-  - `type?: string` *(optional discriminator, only if you need polymorphism)*
+  - `id: string` _(required)_
+  - `label?: string` _(optional display label)_
+  - `type?: string` _(optional discriminator, only if you need polymorphism)_
 
 Example TS:
 
@@ -287,7 +281,7 @@ Order preference:
 - Use **ID** (not “field”).
 - **Description** is optional (semantic meaning), separate from notes.
 
-```
+```yaml
 - id: <id>
   label: <derived or explicit>
   ts: <TypeScript type>
@@ -309,20 +303,25 @@ Order preference:
 
 ### Short text name
 
-- id: name label: Name ts: string presence: required: true default: null constraints:
+- id: name label: Name ts: string presence: required: true default: null
+  constraints:
   - nonEmpty example: "Example name" ui: component: text description: notes:
 
 ### Array of objects
 
-- id: maintenance\_events label: Maintenance Events ts: { date: string; note: string }[] presence: required: false default: [] constraints:
+- id: maintenance_events label: Maintenance Events ts: { date: string; note:
+  string }[] presence: required: false default: [] constraints:
   - maxItems: 200 example:
-  - { date: "2025-10-01", note: "cleaned impeller" } ui: component: repeater description: notes: item.date is DateString
+  - { date: "2025-10-01", note: "cleaned impeller" } ui: component: repeater
+    description: notes: item.date is DateString
 
 ### Map / dictionary
 
-- id: labels label: Labels ts: Record\<string, string> presence: required: false default: {} constraints:
+- id: labels label: Labels ts: Record\<string, string> presence: required: false
+  default: {} constraints:
   - keyPattern: ^[a-z0-9-]+\$
-  - maxKeys: 50 example: { location: "living-room" } ui: component: key-value-editor description: notes: keys are slug-like
+  - maxKeys: 50 example: { location: "living-room" } ui: component:
+    key-value-editor description: notes: keys are slug-like
 
 ---
 
@@ -346,7 +345,8 @@ Quick steps:
 
 Notes:
 
-- Nullable is *not* asked in quick flow (but is available as an advanced option).
+- Nullable is _not_ asked in quick flow (but is available as an advanced
+  option).
 - UI flags are not asked by default; add them only if you explicitly want them.
 
 ---
@@ -361,5 +361,5 @@ This spec can also be used as a guided quiz:
 
 Future extension (deferred):
 
-- Add a final platform step (Airtable/Appsmith/etc.) to suggest equivalent field types and constraints.
-
+- Add a final platform step (Airtable/Appsmith/etc.) to suggest equivalent field
+  types and constraints.

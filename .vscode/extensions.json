@@ -1,7 +1,6 @@
 {
     "recommendations": [
         "ms-python.vscode-pylance",
-        "steoates.autoimport",
         "njpwerner.autodocstring",
         "ms-vscode-remote.remote-containers",
         "dbaeumer.vscode-eslint",
@@ -9,7 +8,6 @@
         "mhutchie.git-graph",
         "donjayamanne.githistory",
         "felipecaputo.git-project-manager",
-        "github.copilot",
         "github.copilot-chat",
         "nicscott.gitkraken-dark",
         "eamodio.gitlens",
@@ -19,7 +17,6 @@
         "christian-kohler.path-intellisense",
         "xdebug.php-debug",
         "esbenp.prettier-vscode",
-        "alefragnani.project-manager",
         "ms-python.python",
         "ms-python.debugpy",
         "plibither8.remove-comments",
@@ -31,6 +28,12 @@
         "linbudu.pnpm-vscode-helper",
         "jacano.vscode-pnpm",
         "alefragnani.bookmarks",
-        "adrianwilczynski.terminal-commands"
+        "adrianwilczynski.terminal-commands",
+        "keesschollaart.vscode-home-assistant",
+        "github.codespaces",
+        "github.copilot",
+        "ms-vscode.vscode-speech",
+        "alefragnani.project-manager",
+        "googlecloudtools.cloudcode"
     ]
 }

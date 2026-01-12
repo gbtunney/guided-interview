@@ -1,10 +1,7 @@
-Here’s your cleaned-up document with high-level article headings, a tidy ending, and all conversational/junk bits removed:
-
----
-
 # Attribute Spec — Type Tree (TypeScript-first)
 
-Use this as a design-time picker. Choose the shape, write the TypeScript type, then add lightweight notes for constraints and UI.  
+Use this as a design-time picker. Choose the shape, write the TypeScript type,
+then add lightweight notes for constraints and UI.  
 This is intentionally plain Markdown, not a schema language.
 
 ---
@@ -43,8 +40,9 @@ This is intentionally plain Markdown, not a schema language.
 - **Map / Dictionary:** Variable keys, uniform value type.  
   Example: Record<string, string> where keys are data.
 
-**Rule of thumb:**  
-- If keys are part of the schema → Object  
+**Rule of thumb:**
+
+- If keys are part of the schema → Object
 - If keys are part of the data → Map
 
 ---
@@ -55,7 +53,7 @@ This is intentionally plain Markdown, not a schema language.
 
 - The machine identifier for the field.
 - Prefer stable and boring.
-- Common styles:  
+- Common styles:
   - snake_case (e.g. product_id)
   - kebab-case (e.g. product-id)
   - camelCase (e.g. productId)
@@ -66,30 +64,31 @@ This is intentionally plain Markdown, not a schema language.
 - The human-facing display name.
 - Derived automatically from the ID when possible.
 
-**Derivation rule (default):**  
-- product_id / product-id / productId → “Product ID”  
+**Derivation rule (default):**
+
+- product_id / product-id / productId → “Product ID”
 - “Product ID” → product_id (default: snake_case)
 
 ---
 
 ## 3. Shape
 
-- **Scalar (one value, no structure):**  
+- **Scalar (one value, no structure):**
   - string
   - number
   - boolean
   - null (rare; prefer T | null)
-- **Enum (scalar with a fixed allowed set):**  
+- **Enum (scalar with a fixed allowed set):**
   - string literal union: 'a' | 'b' | 'c'
   - number literal union: 1 | 2 | 3
-- **Object (fixed structure, known fields):**  
+- **Object (fixed structure, known fields):**
   - inline: { ... }
   - named: type X = { ... }
-- **List (ordered collection of items):**  
+- **List (ordered collection of items):**
   - array: T[]
   - readonly array: readonly T[]
   - tuple (fixed length): [T1, T2]
-- **Map / Dictionary (key → value lookup, variable keys):**  
+- **Map / Dictionary (key → value lookup, variable keys):**
   - Record<string, T>
   - Record<'k1' | 'k2', T> (known key set, still map-shaped)
 
@@ -97,7 +96,8 @@ This is intentionally plain Markdown, not a schema language.
 
 ## 4. TypeScript Type Families
 
-- **string:** Text, identifiers, dates/times encoded as strings, URLs, emails, colors.
+- **string:** Text, identifiers, dates/times encoded as strings, URLs, emails,
+  colors.
 - **number:** Counts, measurements, percentages, timestamps.
 - **boolean:** True/false flags.
 - **{ ... }:** Structured object with named fields.
@@ -245,7 +245,8 @@ These are orthogonal to the TS type.
 
 ## 8. Identification and Reference Object Conventions
 
-If you use references as objects (instead of raw id strings), a common minimal shape is:
+If you use references as objects (instead of raw id strings), a common minimal
+shape is:
 
 - **Ref**
   - id: string (required)
@@ -265,7 +266,7 @@ Order preference:
 - Use ID (not “field”).
 - Description is optional (semantic meaning), separate from notes.
 
-```
+```yaml
 id: <id>
 label: <derived or explicit>
 ts: <TypeScript type>
@@ -291,15 +292,15 @@ notes: <optional misc>
   label: Name  
   ts: string  
   presence:  
-    required: true  
-    default: null  
-  constraints:  
-    - nonEmpty  
-  example: “Example name”  
-  ui:  
-    component: text  
-  description:  
-  notes:
+   required: true  
+   default: null  
+  constraints:
+  - nonEmpty  
+    example: “Example name”  
+    ui:  
+     component: text  
+    description:  
+    notes:
 
 ### Array of Objects
 
@@ -307,16 +308,16 @@ notes: <optional misc>
   label: Maintenance Events  
   ts: { date: string; note: string }[]  
   presence:  
-    required: false  
-    default: []  
-  constraints:  
-    - maxItems: 200  
-  example:
-    - { date: “2025-10-01”, note: “cleaned impeller” }  
-  ui:  
-    component: repeater  
-  description:  
-  notes: item.date is DateString
+   required: false  
+   default: []  
+  constraints:
+  - maxItems: 200  
+    example:
+  - { date: “2025-10-01”, note: “cleaned impeller” }  
+    ui:  
+     component: repeater  
+    description:  
+    notes: item.date is DateString
 
 ### Map / Dictionary
 
@@ -324,16 +325,16 @@ notes: <optional misc>
   label: Labels  
   ts: Record<string, string>  
   presence:  
-    required: false  
-    default: {}  
-  constraints:  
-    - keyPattern: ^[a-z0-9-]+$
-    - maxKeys: 50  
-  example: { location: “living-room” }  
-  ui:  
-    component: key-value-editor  
-  description:  
-  notes: keys are slug-like
+   required: false  
+   default: {}  
+  constraints:
+  - keyPattern: ^[a-z0-9-]+$
+  - maxKeys: 50  
+    example: { location: “living-room” }  
+    ui:  
+     component: key-value-editor  
+    description:  
+    notes: keys are slug-like
 
 ---
 

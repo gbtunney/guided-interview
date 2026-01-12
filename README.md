@@ -1,6 +1,7 @@
 # gbt-boilerplate 🐌
 
 > **Note:** Recent changes merged from PRs #2, #5, and #9:
+>
 > - Fixed Git hooks (pre-commit, pre-push, commit-msg) with proper shebangs
 > - Fixed linting and formatting issues across the codebase
 > - Updated ESLint configuration with projectService enabled
