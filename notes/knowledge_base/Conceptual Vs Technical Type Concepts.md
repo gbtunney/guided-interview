@@ -1,22 +1,23 @@
 # Schema Types
 
-# # Conceptual Types
+## Conceptual Types
 
-A **conceptual type** describes **what something is in the real world**,
-independent of how it is stored, transmitted, or rendered. It is **conceptual
-and portable**, not tied to TypeScript, databases, or UI frameworks.
+A **conceptual type** describes **what something is in the real
+world**,independent of how it is stored, transmitted, or rendered. It is
+**conceptual and portable**, not tied to TypeScript, databases, or UI
+frameworks.
 
 It answers:
 
 > “What kind of thing is this?”
 
-Conceptual types are:
+**Conceptual types are:**
 
 - Human-meaningful
 - Stable across systems
 - Portable between platforms
 
-Examples:
+**Examples:**
 
 - Date
 - DateTime
@@ -30,7 +31,7 @@ Examples:
 
 ---
 
-# # Technical (Raw) Types
+## Technical (Raw) Types
 
 A **technical type** (sometimes called _raw_ or _storage_ type) describes **how
 a value is represented** in code or data.
@@ -43,15 +44,15 @@ Examples:
 - `{ ... }`
 - `T[]`
 
-A single conceptual type may map to multiple technical types.
+A **single** conceptual type may map to multiple technical types.
 
 ---
 
-# # UI / Interaction Types
+## UI / Interaction Types
 
 A **UI type** describes **how a human interacts** with the value.
 
-Examples:
+### **Examples:**
 
 - date-picker
 - time-picker
@@ -64,12 +65,12 @@ UI types are _affordances_, not data definitions.
 
 ---
 
-# # Why Separate These Layers?
+## Why Separate These Layers?
 
-Because they change at different rates:
+**Because they change at different rates:**
 
 - Conceptual meaning is stable
 - Technical representation changes by platform
 - UI changes by context
 
-Separating them prevents premature coupling
+**_Separating them prevents premature coupling_**
