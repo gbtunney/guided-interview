@@ -1,42 +1,18 @@
 # Attribute Spec — Guided Interview (AI-Assisted Flow)
 
-## Overview
+## Identity Phase
 
-This document defines the conversational, AI-guided interview process used to
-produce field or object specs that conform to the Attribute Spec cheat sheet.
+## Type Phase
 
-It is not a rigid CLI, schema, or form. It is a human-first interview with
-suggested options and defaults.
-
-### Purpose
-
-- Reduce cognitive load when defining fields
-- Avoid premature schema decisions
-- Allow freeform answers with AI normalization
-- Produce a clean, final Markdown spec at the end
-
-### Core Principles
-
-- One question at a time
-- Numbered options where possible
-- Freeform answers always allowed
-- “Quick” by default, expandable to “Full” if needed
-- TypeScript-first output
-- Platform-agnostic
-
-## Interview Modes
-
-### Quick Mode (default)
-
-Used for most fields.
+## Other?
 
 #### Steps
 
 1. ID or Label
 2. Type intent (AI suggests TS type + shape)
-3. Presence (required + default)
-4. Constraints (optional)
-5. UI component (optional)
+3. UI component (optional)
+4. Presence (required + default)
+5. Constraints (optional)
 6. Description (optional)
 7. Emit spec
 
@@ -63,7 +39,7 @@ The AI may ask Type, UI, or Intent first, then infer the rest.
 
 User may start with any one of the following:
 
-- ID or Label
+- ID, Label,Description
   - e.g. install_date or “Install Date”
 - Rough idea / intent
   - e.g. “a date when it was installed”
@@ -161,11 +137,107 @@ Because ChatGPT cannot push files automatically:
   - copying from Canvas
   - or saving from your editor
 
-## Future Extensions (Deferred)
+## TODO: SPEC DRAFT
 
-- Platform adapters (Airtable, Appsmith, etc.)
-- Schema export (JSON Schema, Zod, etc.)
-- Quiz / flashcard mode
-- Batch interviews
+```yaml
+identity:
+  id: <id> #sluglike
+  label: <derived or explicit>
+  description: <meaning>
+type:
+  technical: <technical list>
+  conceptual: <conceptual list>
+  raw: <possib type>
+ui:
+  component: <component>
+constraints:
+  - <rule>
+presence:
+  optional: boolean
+  required: boolean
+  default: <value>
+example: <value>
+notes: <optional misc>
+```
 
-These are intentionally out of scope for the current flow.
+## Minimal Field Spec Template
+
+### Order Preference
+
+- Put constraints above example.
+- Use ID (not “field”).
+- Description is optional (semantic meaning), separate from notes.
+
+```yaml
+id: <id>
+label: <derived or explicit>
+ts: <TypeScript type>
+presence:
+  required: true|false
+  default: <value>
+constraints:
+  - <rule>
+example: <value>
+ui:
+  component: <component>
+description: <optional semantic meaning>
+notes: <optional misc>
+```
+
+### Examples TODO; update w new schema
+
+#### Short Text Name
+
+```yaml
+  id: name
+  label: Name
+  ts: string
+  presence:
+   required: true
+   default: null
+  constraints:
+  - nonEmpty
+    example: “Example name”
+    ui:
+     component: text
+    description:
+    notes:
+```
+
+#### Array of Objects
+
+```yaml
+  id: maintenance_events
+  label: Maintenance Events
+  ts: { date: string; note: string }[]
+  presence:
+   required: false
+   default: []
+  constraints:
+  - maxItems: 200
+    example:
+  - { date: “2025-10-01”, note: “cleaned impeller” }
+    ui:
+     component: repeater
+    description:
+    notes: item.date is DateString
+```
+
+#### Map / Dictionary
+
+```yaml
+id: labels
+label: Labels
+ts: Record<string, string>
+presence:
+  required: false
+  default: {}
+constraints:
+  - keyPattern: ^[a-z0-9-]+$
+  - maxKeys: 50
+    example: { location: “living-room” }
+    ui:
+      component: key-value-editor
+    description:
+    notes: keys are slug-like
+```
