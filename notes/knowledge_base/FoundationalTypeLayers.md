@@ -8,8 +8,11 @@ layers, we can ensure flexibility and adaptability across different systems, pla
 
 ## Definitions
 
-- **Conceptual Type**: _Describes the real-world meaning of the value_, independent of how it is stored or displayed. Conceptual types are **human-meaningful**, **stable** across systems, and **portable** between platforms.
-- **Technical Type**: _Describes the **structural** representation of the value in code or data_. Technical types focus on the data's **shape** and **format**, rather than its meaning or how it is presented to users.
+- **Conceptual Type**: _Describes the real-world meaning of the value_, independent of how it is stored or
+  displayed. Conceptual types are **human-meaningful**, **stable** across systems, and **portable** between
+  platforms.
+- **Technical Type**: _Describes the **structural** representation of the value in code or data_. Technical
+  types focus on the data's **shape** and **format**, rather than its meaning or how it is presented to users.
 - **User Interface Type**: _Describes how the value is presented to or interacted with by a human user_. User
   Interface (**_UI_**) types define **affordances**—design features that provide **visual** or **interactive**
   cues to suggest how user can interact with an element (e.g., _buttons_, _sliders_, _text inputs_).
