@@ -32,12 +32,19 @@
 
 ## guided-interview 🐌
 
-This repository contains resources and documentation for a **conversational, AI-guided interview process**
-designed to help users create field, object, and data specifications. The goal is to simplify the process of
-defining attributes and their types while maintaining flexibility and adaptability across different systems,
-platforms, and contexts.
+### Repository Structure
 
-## Key Features
+- **[`notes/knowledge_base/`](notes/knowledge_base)**: Contains detailed documentation, including:
+  - **[`FoundationalTypeLayers.md`](notes/knowledge_base/FoundationalTypeLayers.md)**: Explains the three
+    foundational type layers.
+  - **[`VocabularyAndCheatsheet.md`](notes/knowledge_base/VocabularyAndCheatsheet.md)**: A technical
+    vocabulary and TypeScript cheatsheet for types and constraints.
+  - **[`PlanAiGuidedInterview.md`](notes/knowledge_base/PlanAiGuidedInterview.md)**: The guided interview
+    specification and flow design.
+
+---
+
+### Key Features
 
 - **Human-First Approach**: A conversational interview process with suggested options and defaults.
 - **Three Type Layers**: Focus on **Conceptual**, **Technical**, and **User Interface** types to ensure
@@ -47,17 +54,11 @@ platforms, and contexts.
 - **TypeScript-First Output**: Generates clean, TypeScript-ready specifications.
 - **Platform-Agnostic**: Designed to work across various platforms and use cases.
 
-## Repository Structure
+---
 
-- **`notes/knowledge_base/`**: Contains detailed documentation, including:
-  - **`FoundationalTypeLayers.md`**: Explains the three foundational type layers.
-  - **`VocabularyAndCheatsheet.md`**: A technical vocabulary and TypeScript cheatsheet for types and
-    constraints.
-  - **`PlanAiGuidedInterview.md`**: The guided interview specification and flow design.
+### Getting Started
 
-## Getting Started
-
-1. Clone the repository:
+_Clone the repository:_
 
 ```sh
 git clone https://github.com/your-repo-name.git
