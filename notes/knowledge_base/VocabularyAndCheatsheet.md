@@ -2,83 +2,75 @@
 
 ## Table of Contents
 
-1. [Type Reference Table](#type-reference-table) 1.1.
-   [Typescript Specific Reference](#typescript-specific-reference)
-2. [Vocabulary - Technical Types](#vocabulary---technical-types) 2.1.
-   [Scalar (One Value, No Structure)](#scalar-one-value-no-structure) 2.2.
-   [Enum (Scalar with a Fixed Allowed Set)](#enum-scalar-with-a-fixed-allowed-set)
-   2.3.
-   [Object (Fixed Structure, Known Fields)](#object-fixed-structure-known-fields)
-   2.4. [List (Ordered Collection of Items)](#list-ordered-collection-of-items)
-   2.5.
-   [Map / Dictionary (Key → Value Lookup, Variable Keys)](#map--dictionary-key--value-lookup-variable-keys)
-   2.6. [Notes: Object vs Map / Dictionary](#notes-object-vs-map--dictionary)
-3. [Conceptual Types Deep Dive](#conceptual-types-deep-dive)
-
-- 3.1. [Time-Related](#time-related) 3.1.1. [Date](#date) 3.1.2.
-  [DateTime](#datetime) 3.1.3. [Duration](#duration) 3.1.4.
-  [Interval (for completeness)](#interval-for-completeness)
-- 3.2. [Key Distinctions (Summary Table)](#key-distinctions-summary-table)
+- [Type Reference Table](#type-reference-table)
+- [Vocabulary - Technical Types](#vocabulary---technical-types)
+  - [Scalar (One Value, No Structure)](#scalar-one-value-no-structure)
+  - [Enum (Scalar with a Fixed Allowed Set)](#enum-scalar-with-a-fixed-allowed-set)
+  - [Object (Fixed Structure, Known Fields)](#object-fixed-structure-known-fields)
+  - [List (Ordered Collection of Items)](#list-ordered-collection-of-items)
+  - [Map / Dictionary (Key → Value Lookup, Variable Keys)](#map--dictionary-key--value-lookup-variable-keys)
+  - [Notes: Object vs Map / Dictionary](#notes-object-vs-map--dictionary)
+- [Conceptual Types Deep Dive](#conceptual-types-deep-dive)
+  - [Time-Related](#time-related)
+    - [Date](#date)
+    - [DateTime](#datetime)
+    - [Duration](#duration)
+    - [Interval](#interval)
+  - [Key Distinctions (Summary Table)](#key-distinctions-summary-table)
 
 ## Type Reference Table
 
-> **Warning:** _This table is not exhaustive and serves as a general reference.
-> The actual implementation may vary depending on specific use cases, system
-> requirements, or platform constraints. Always validate against your system's
-> requirements and data models._
+> **Warning** : _This table is not exhaustive and serves as a general reference. The actual implementation may
+> vary depending on specific use cases, system, requirements, or platform constraints. Always validate against
+> your system's requirements and data models._
 
-| Conceptual Type     | Meaning                           | Common Raw Types                                     | Typical UI Types             | Multi-Value? |
-| ------------------- | --------------------------------- | ---------------------------------------------------- | ---------------------------- | ------------ |
-| Identifier          | Stable ID for a thing             | `string`, `number`                                   | text, read-only-text         | Single       |
-| Reference           | Points to another entity          | `string`, `{ id: string, label: string }`            | entity-picker, combobox      | Single       |
-| Name                | Human-facing title                | `string`                                             | text                         | Single       |
-| Description / Notes | Longer free text                  | `string`                                             | textarea, richtext           | Single       |
-| Code / Slug         | Constrained token                 | `string`                                             | text, code                   | Single       |
-| URL                 | Web/resource locator              | `string`                                             | text                         | Single       |
-| Email               | Email address                     | `string`                                             | text                         | Single       |
-| Phone               | Phone number                      | `string`                                             | text                         | Single       |
-| Flag                | True/false indicator              | `boolean`                                            | switch, checkbox             | Single       |
-| Status              | Closed set state (enum)           | `Enum<string>`                                       | select, radio-group          | Single       |
-| Mode                | Behavior selector (enum)          | `Enum<string>`                                       | segmented-control, select    | Single       |
-| Count               | Discrete quantity                 | `number`                                             | number-input, stepper        | Single       |
-| Percentage          | Ratio value                       | `number`                                             | number-input, slider         | Single       |
-| Rating              | Bounded score (enum)              | `number`, `Enum<number>`                             | slider, select               | Single       |
-| Money               | Amount + currency                 | `{ amount: number, currency: string }`               | number-input + select        | Single       |
-| Measurement         | Value + unit                      | `{ value: number, unit: string }`                    | number-input + select        | Single       |
-| Date                | Calendar date                     | `string`                                             | date-picker                  | Single       |
-| Time                | Time of day                       | `string`                                             | time-picker                  | Single       |
-| DateTime            | Timestamp                         | `string`, `number`                                   | datetime-picker              | Single       |
-| Duration            | Length of time                    | `number`,`string`, `{ value: number, unit: string }` | duration-input               | Single       |
-| Interval            | Start/end span                    | `{ start: string\|number, end: string\|number }`     | datetime-picker (x2)         | Single       |
-| Tag                 | Label for grouping                | `string`, `Array<string>`                            | tag-input, multi-select      | List         |
-| Labels / Metadata   | Arbitrary key-value props         | `Record<string, string>`                             | key-value-editor             | Map          |
-| Event               | Record of something that happened | `{ [key: string]: any }`                             | table-editor, repeater       | List         |
-| File                | File object/ref                   | `Binary`, `{ id: string, name: string }`             | file-upload                  | Single       |
-| Image               | Image file                        | Same as File                                         | image-upload                 | Single       |
-| Enum                | Closed set of predefined values   | `Enum<string\|number>`                               | select, radio-group          | Single       |
-| Multi-Select Enum   | List of predefined values         | `Array<Enum<string>>`                                | multi-select, checkbox-group | List         |
+| Conceptual Type     | Meaning                           | Common Raw Types                                 | Typical UI Types             | Multi-Value? |
+| ------------------- | --------------------------------- | ------------------------------------------------ | ---------------------------- | ------------ |
+| Identifier          | Stable ID for a thing             | `string, number`                                 | text, read-only-text         | Single       |
+| Reference           | Points to another entity          | `string, { id: string, label: string }`          | entity-picker, combobox      | Single       |
+| Name                | Human-facing title                | `string`                                         | text                         | Single       |
+| Description / Notes | Longer free text                  | `string`                                         | textarea, richtext           | Single       |
+| Code / Slug         | Constrained token                 | `string`                                         | text, code                   | Single       |
+| URL                 | Web/resource locator              | `string`                                         | text                         | Single       |
+| Email               | Email address                     | `string`                                         | text                         | Single       |
+| Phone               | Phone number                      | `string`                                         | text                         | Single       |
+| Flag                | True/false indicator              | `boolean`                                        | switch, checkbox             | Single       |
+| Status              | Closed set state (enum)           | `Enum<string>`                                   | select, radio-group          | Single       |
+| Mode                | Behavior selector (enum)          | `Enum<string>`                                   | segmented-control, select    | Single       |
+| Count               | Discrete quantity                 | `number`                                         | number-input, stepper        | Single       |
+| Percentage          | Ratio value                       | `number`                                         | number-input, slider         | Single       |
+| Rating              | Bounded score (enum)              | `number`, `Enum<number>`                         | slider, select               | Single       |
+| Money               | Amount + currency                 | `{ amount: number, currency: string }`           | number-input + select        | Single       |
+| Measurement         | Value + unit                      | `{ value: number, unit: string }`                | number-input + select        | Single       |
+| Date                | Calendar date                     | `string`                                         | date-picker                  | Single       |
+| Time                | Time of day                       | `string`                                         | time-picker                  | Single       |
+| DateTime            | Timestamp                         | `string`, `number`                               | datetime-picker              | Single       |
+| Duration            | Length of time                    | `number,string,{ value: number, unit: string }`  | duration-input               | Single       |
+| Interval            | Start/end span                    | `{ start: string\|number, end: string\|number }` | datetime-picker (x2)         | Single       |
+| Tag                 | Label for grouping                | `string, Array<string>`                          | tag-input, multi-select      | List         |
+| Labels / Metadata   | Arbitrary key-value props         | `Record<string, string>`                         | key-value-editor             | Map          |
+| Event               | Record of something that happened | `{ [key: string]: any }`                         | table-editor, repeater       | List         |
+| File                | File object/ref                   | `Binary`, `{ id: string, name: string }`         | file-upload                  | Single       |
+| Image               | Image file                        | Same as File                                     | image-upload                 | Single       |
+| Enum                | Closed set of predefined values   | `Enum<string\|number>`                           | select, radio-group          | Single       |
+| Multi-Select Enum   | List of predefined values         | `Array<Enum<string>>`                            | multi-select, checkbox-group | List         |
 
 ### Typescript Specific Reference
 
 ?? TODO: IDK WHERE TO PUT THIS ??
 
-To better understand the raw data types used in this above table, here are some
-common data type definitions:
+To better understand the raw data types used in this above table, here are some common data type definitions:
 
-- **`boolean`:** Represents a true/false value, often used for flags or binary
-  states.
-- **`{ ... }`:** A structured object with named fields (e.g.,
-  `{ id: string, label: string }`).
+- **`boolean`:** Represents a true/false value, often used for flags or binary states.
+- **`{ ... }`:** A structured object with named fields (e.g., `{ id: string, label: string }`).
 - **`T[]` or `Array<T>`:** An ordered list of items of type `T`.
-- **`Record<string, T>`:** A dictionary or map where keys are strings and values
-  are of type `T`.
+- **`Record<string, T>`:** A dictionary or map where keys are strings and values are of type `T`.
 
 ## Vocabulary - Technical Types
 
-### Scalar (One Value, No Structure)
+### Scalar (_One Value, No Structure_)
 
-- A **scalar** is a single value. It is not nested, not iterable, and not a
-  container.
+- A **scalar** is a single value. It is not nested, not iterable, and not a container.
 
 #### Examples
 
@@ -109,8 +101,7 @@ common data type definitions:
 
 ### Object (Fixed Structure, Known Fields)
 
-- An **object** has a fixed structure with known fields. Each field has a
-  specific meaning.
+- An **object** has a fixed structure with known fields. Each field has a specific meaning.
 
 #### Examples
 
@@ -133,35 +124,33 @@ common data type definitions:
 
 ### Map / Dictionary (Key → Value Lookup, Variable Keys)
 
-- A **map** or **dictionary** is a key-value lookup structure with variable
-  keys.
+- A **map** or **dictionary** is a key-value lookup structure with variable keys.
 
 #### Examples
 
 - `Record<string, T>`: A map where keys are strings and values are of type `T`.
-- `Record<'k1' | 'k2', T>`: A map with a known set of keys, but still
-  map-shaped.
+- `Record<'k1' | 'k2', T>`: A map with a known set of keys, but still map-shaped.
 
 ---
 
 ### Notes: Object vs Map / Dictionary
 
-- **Object:** Known fields, fixed meaning per field.  
-  **Example**: `{ id: string; name: string }`
-- **Map / Dictionary:** Variable keys, uniform value type.  
-  **Example**: `Record<string, string>` where keys are data.
+- **Object:** Known fields, fixed meaning per field.
+  - **Example**: `{ id: string; name: string }`
+- **Map / Dictionary:** Variable keys, uniform value type.
+  - **Example**: `Record<string, string>` where keys are data.
 
-**Rule of Thumb:**
+##### **Rule of Thumb:**
 
-- If keys are part of the schema → `Object`
-- If keys are part of the data → `Map`
+> If keys are part of the schema → `Object` If keys are part of the data → `Map`
+
+---
 
 ## Conceptual Types Deep Dive
 
 ### Time-Related
 
-Time-related concepts are often confused. They are **siblings**, not
-parent/child.
+Time-related concepts are often confused. They are **siblings**, not parent/child.
 
 ```text
 Time-related
@@ -181,7 +170,7 @@ Time-related
 
 **Questions it answers:**
 
-- “On what day?”
+- _“On what day?”_
 
 **Examples:**
 
@@ -205,7 +194,7 @@ Time-related
 
 **Questions it answers:**
 
-- “At what exact moment?”
+- _“At what exact moment?”_
 
 **Examples:**
 
@@ -230,7 +219,7 @@ Time-related
 
 **Questions it answers:**
 
-- “How long?”
+- _“How long?”_
 
 **Examples:**
 
@@ -250,10 +239,10 @@ Time-related
 - **Structured object**
 
 ```ts
-  { value: 5, unit: 'minutes' }
+{ value: 5, unit: 'minutes' }
 ```
 
-**Typical UI:**
+- **Typical UI:**
 
 - duration input
 - number + unit selector
@@ -261,11 +250,15 @@ Time-related
 
 ---
 
-#### Interval (for completeness)
+#### Interval
 
 **What it represents:**
 
 - A span between two points in time
+
+**Questions it answers:**
+
+- _From when to when?_
 
 **Examples:**
 
@@ -273,15 +266,17 @@ Time-related
 
 **Common representations:**
 
-- `{ start: DateTime; end: DateTime }`
+```ts
+{ start: DateTime, end: DateTime}
+```
 
 ---
 
 #### Key Distinctions (Summary Table)
 
-| Concept  | Answers            | Example             |
-| -------- | ------------------ | ------------------- |
-| Date     | What day?          | `2026-01-10`        |
-| DateTime | What moment?       | `2026-01-10T14:32Z` |
-| Duration | How long?          | `30 minutes`        |
-| Interval | From when to when? | start + end         |
+| Concept  | Answers              | Example             |
+| -------- | -------------------- | ------------------- |
+| Date     | _What day?_          | `2026-01-10`        |
+| DateTime | _What moment?_       | `2026-01-10T14:32Z` |
+| Duration | _How long?_          | `30 minutes`        |
+| Interval | _From when to when?_ | `start + end`       |
