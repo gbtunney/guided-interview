@@ -1,3 +1,0 @@
-# Other
-
-## Presence and Defaults
