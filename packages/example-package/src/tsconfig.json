@@ -1,7 +1,7 @@
 {
-    "extends": "@snailicide/build-config/tsconfig-base",
+    "extends": "@gbt/build-config/tsconfig-base",
     "compilerOptions": {
-        "outDir": "./../types" /* Specify an output folder for all emitted files. */,
+        "outDir": "./../types",
         "sourceMap": true,
         "declaration": true,
         "declarationDir": "./../types",

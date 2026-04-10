@@ -30,12 +30,14 @@
             "import": "./dist/index.js",
             "default": "./dist/index.js",
             "types": "./types/index.d.ts"
-        }
+        },
+        "./tsconfig-base": "./tsconfig-base.json"
     },
     "files": [
         "CHANGELOG.md",
         "dist",
-        "types"
+        "types",
+        "tsconfig-base.json"
     ],
     "dependencies": {
         "@rollup/plugin-commonjs": "^28.0.0",

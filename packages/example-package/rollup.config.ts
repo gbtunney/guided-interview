@@ -1,31 +1,32 @@
-import { rollup } from '@snailicide/build-config'
+import { toRollupConfigs } from '@gbt/build-config'
+import type { BuildPlan } from '@gbt/build-config'
 import type { RollupOptions } from 'rollup'
 
-import pkg from './package.json' assert { type: 'json' }
+import pkg from './package.json' with { type: 'json' }
 
-const PRINT_EXPORTS: boolean = false
-
-const directory_paths = {
-    output_dir: './dist/',
-    source_dir: './src/',
+const plan: BuildPlan = {
+    identity: {
+        runtime: 'node',
+        product: 'library',
+        buildStrategy: 'bundle',
+    },
+    sourceDir: './src',
+    outputDir: './dist',
+    entries: [
+        {
+            key: '.',
+            outputKinds: ['esm', 'cjs'],
+            banner: true,
+            sourcemap: true,
+        },
+    ],
 }
 
-const CONFIG_OBJ = [
-    ...rollup.getConfigEntries(
-        directory_paths,
-        [
-            {
-                export_key: '*',
-                export_types: ['default', 'import', 'require', 'types'],
-                library_name: 'gbtBoilerplate',
-            },
-        ],
-        rollup.DEFAULT_PLUGINS_BUNDLED,
-        pkg,
-    ),
-]
-
-const CONFIG: Array<RollupOptions> = rollup.getRollupConfig(CONFIG_OBJ)
-rollup.getPackageExports(CONFIG_OBJ, PRINT_EXPORTS)
+const CONFIG: RollupOptions[] = toRollupConfigs({
+    plan,
+    pkg,
+    preset: 'node_library',
+    libraryName: 'gbtBoilerplate',
+})
 
 export default CONFIG

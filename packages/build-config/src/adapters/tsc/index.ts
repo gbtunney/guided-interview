@@ -1,4 +1,5 @@
 import { execSync } from 'child_process'
+import path from 'path'
 import type { BuildAdapter } from '../../build/ports'
 import type { Runtime, Product } from '../../build/types'
 
@@ -10,6 +11,7 @@ export const tscAdapter: BuildAdapter = {
     },
 
     async build(plan): Promise<void> {
-        execSync('tsc --build', { cwd: plan.sourceDir, stdio: 'inherit' })
+        const packageRoot = path.resolve(plan.sourceDir, '..')
+        execSync('tsc --build', { cwd: packageRoot, stdio: 'inherit' })
     },
 }

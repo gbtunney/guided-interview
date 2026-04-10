@@ -42,7 +42,7 @@
     "module": "./dist/index.mjs",
     "types": "./dist/index.d.ts",
     "devDependencies": {
-        "@snailicide/build-config": "^1.4.4",
+        "@gbt/build-config": "workspace:*",
         "@types/node": "^25.0.6",
         "cross-var": "^1.1.0",
         "eslint": "^9.39.2",

@@ -16,7 +16,7 @@ const makeOutput = (
     base: string,
     kind: OutputKind,
     entry: EntrySpec,
-    bannerStr: string,
+    bannerStr: string | undefined,
     name: string,
 ): OutputOptions => {
     const { format, ext } = OUTPUT_KIND_FORMAT[kind]
@@ -50,8 +50,7 @@ export const toRollupConfigs = ({
     libraryName = 'library',
 }: ToRollupOptions): RollupOptions[] => {
     const plugins = getPluginPreset(preset ?? 'node_library')
-    const bannerStr =
-        pkg !== undefined ? getBanner(libraryName, pkg) : ''
+    const bannerStr = pkg !== undefined ? getBanner(libraryName, pkg) : undefined
 
     return plan.entries.map((entry): RollupOptions => {
         const input = resolveInputPath(plan, entry.key, entry.input)
