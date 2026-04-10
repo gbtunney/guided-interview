@@ -1,0 +1,83 @@
+{
+    "name": "@gbt/build-config",
+    "version": "0.1.0",
+    "private": false,
+    "description": "GBT shared build configuration and adapter system",
+    "scripts": {
+        "\n========== BUILD >> ==========": "",
+        "build": "pnpm build:ts",
+        "build:ts": "pnpm exec tsc --build",
+        "\n========== DEV >> ==========": "",
+        "dev": "pnpm exec tsc --build --watch",
+        "\n========== TEST >> ==========": "",
+        "test": "vitest run",
+        "test:watch": "vitest watch",
+        "\n========== CLEAN >> ==========": "",
+        "clean": "pnpm clean:ts && pnpm clean:build",
+        "clean:ts": "pnpm exec tsc --build --clean",
+        "clean:build": "pnpm exec rm -rf ./dist ./types",
+        "\n========== CHECK >> ==========": "",
+        "check": "pnpm lint",
+        "lint": "pnpm exec eslint .",
+        "\n========== FIX >> ==========": "",
+        "fix": "pnpm prettier --write && pnpm lint --fix",
+        "prettier": "prettier --ignore-path ./.gitignore --no-error-on-unmatched-pattern ."
+    },
+    "main": "./dist/index.js",
+    "types": "./types/index.d.ts",
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "default": "./dist/index.js",
+            "types": "./types/index.d.ts"
+        }
+    },
+    "files": [
+        "CHANGELOG.md",
+        "dist",
+        "types"
+    ],
+    "dependencies": {
+        "@rollup/plugin-commonjs": "^28.0.0",
+        "@rollup/plugin-json": "^6.1.0",
+        "@rollup/plugin-node-resolve": "^16.0.0",
+        "@rollup/plugin-terser": "^0.4.4",
+        "rollup-plugin-node-externals": "^7.1.2"
+    },
+    "devDependencies": {
+        "@types/node": "^25.0.6",
+        "eslint": "^9.39.2",
+        "rollup": "^4.55.1",
+        "typescript": "^5.9.3",
+        "vitest": "^4.0.16"
+    },
+    "peerDependencies": {
+        "rollup": "^4.0.0",
+        "typescript": "^5.0.0"
+    },
+    "peerDependenciesMeta": {
+        "rollup": { "optional": true }
+    },
+    "type": "module",
+    "author": {
+        "name": "Gillian Tunney",
+        "email": "gbtunney@mac.com"
+    },
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/gbtunney/guided-interview"
+    },
+    "homepage": "https://github.com/gbtunney/guided-interview",
+    "packageManager": "pnpm@10.9.0",
+    "engines": {
+        "node": "21.x",
+        "pnpm": ">=9.0.0"
+    },
+    "keywords": [
+        "build",
+        "rollup",
+        "typescript",
+        "tsc"
+    ]
+}
